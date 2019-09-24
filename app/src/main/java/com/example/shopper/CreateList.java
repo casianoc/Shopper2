@@ -34,6 +34,9 @@ public class CreateList extends AppCompatActivity {
     // declare a calendar
     Calendar calendar;
 
+    // declare database handler
+    DBHandler dbHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,8 @@ public class CreateList extends AppCompatActivity {
             }
         });
 
+        // initialize database handler
+        dbHandler = new DBHandler(this, null);
     }
 
     public void updateDueDate(){
@@ -127,6 +132,8 @@ public class CreateList extends AppCompatActivity {
         if (name.trim().equals("") || store.trim().equals("") || date.trim().equals("")){
             Toast.makeText(this, "Please enter a name, store, and date!", Toast.LENGTH_LONG).show();
         } else {
+            // add shopping list to database
+            dbHandler.addShoppingList(name, store, date);
             // if none of the strings are empty, display Shopping List Added Toast
             Toast.makeText(this, "Shopping List Added!", Toast.LENGTH_LONG).show();
         }
